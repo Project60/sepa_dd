@@ -57,6 +57,9 @@ class CRM_Sepa_Form_Report_SepaMandateGeneric extends CRM_Report_Form {
           'status' => array(
             'title' => ts('Mandate Status', array('domain' => 'org.project60.sepa')),
           ),
+          'account_holder' => array(
+            'title' => ts('Account Holder', array('domain' => 'org.project60.sepa')),
+          ),
           'iban' => array(
             'title' => ts('IBAN', array('domain' => 'org.project60.sepa')),
           ),
@@ -110,6 +113,12 @@ class CRM_Sepa_Form_Report_SepaMandateGeneric extends CRM_Report_Form {
             'type' => CRM_Utils_Type::T_STRING,
             'operatorType' => CRM_Report_Form::OP_MULTISELECT,
             'options' => CRM_Sepa_Logic_Status::getStatusSelectorOptions(TRUE),
+          ),
+          'account_holder' => array(
+            'name' => 'account_holder',
+            'type' => CRM_Utils_Type::T_STRING,
+            'operatorType' => CRM_Report_Form::OP_STRING,
+            'title' => ts('account_holder', array('domain' => 'org.project60.sepa')),
           ),
           'iban' => array(
             'name' => 'iban',

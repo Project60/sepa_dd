@@ -112,6 +112,14 @@
   </foreignKey>
 
   <field>
+    <name>account_holder</name>
+    <type>varchar</type>
+    <length>255</length>
+    <comment>Name of the account holder</comment>
+    <add>4.3</add>
+  </field>
+
+  <field>
     <name>iban</name>
     <type>varchar</type>
     <length>42</length>

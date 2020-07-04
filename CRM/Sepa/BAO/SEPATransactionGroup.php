@@ -121,7 +121,11 @@ class CRM_Sepa_BAO_SEPATransactionGroup extends CRM_Sepa_DAO_SEPATransactionGrou
       }
 
       // make some fields comply with SEPA standards
-      $t["display_name"]   = CRM_Sepa_Logic_Verification::convert2SepaCharacterSet($t["display_name"]);
+      if (!empty($t["account_holder"])) {
+        $t["display_name"] = CRM_Sepa_Logic_Verification::convert2SepaCharacterSet($t["account_holder"]);
+      } else {
+        $t["display_name"] = CRM_Sepa_Logic_Verification::convert2SepaCharacterSet($t["display_name"]);
+      }
       $t["street_address"] = CRM_Sepa_Logic_Verification::convert2SepaCharacterSet($t["street_address"]);
       $t["postal_code"]    = CRM_Sepa_Logic_Verification::convert2SepaCharacterSet($t["postal_code"]);
       $t["city"]           = CRM_Sepa_Logic_Verification::convert2SepaCharacterSet($t["city"]);

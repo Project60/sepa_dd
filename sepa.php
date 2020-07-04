@@ -519,6 +519,7 @@ function sepa_civicrm_tokens(&$tokens) {
     "$prefix.status"                  => ts('Status', array('domain' => 'org.project60.sepa')),
     "$prefix.date"                    => ts('Signature Date (raw)', array('domain' => 'org.project60.sepa')),
     "$prefix.date_text"               => ts('Signature Date', array('domain' => 'org.project60.sepa')),
+    "$prefix.account_holder"          => ts('Account Holder', array('domain' => 'org.project60.sepa')),
     "$prefix.iban"                    => ts('IBAN', array('domain' => 'org.project60.sepa')),
     "$prefix.iban_anonymised"         => ts('IBAN (anonymised)', array('domain' => 'org.project60.sepa')),
     "$prefix.bic"                     => ts('BIC', array('domain' => 'org.project60.sepa')),
@@ -579,7 +580,8 @@ function sepa_civicrm_tokenValues(&$values, $cids, $job = null, $tokens = array(
       $values[$result->contact_id]["$prefix.type"]            = $mandate['type'];
       $values[$result->contact_id]["$prefix.status"]          = $mandate['status'];
       $values[$result->contact_id]["$prefix.date"]            = $mandate['date'];
-      $values[$result->contact_id]["$prefix.iban"]            = $mandate['iban'];
+      $values[$result->contact_id]["$prefix.account_holder"]  = $mandate['account_holder'];
+      $values[$result->contact_id]["$prefix.iban"]            = $mandate[''];
       $values[$result->contact_id]["$prefix.iban_anonymised"] = CRM_Sepa_Logic_Verification::anonymiseIBAN($mandate['iban']);
       $values[$result->contact_id]["$prefix.bic"]             = $mandate['bic'];
 

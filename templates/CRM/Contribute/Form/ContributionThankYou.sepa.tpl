@@ -47,6 +47,10 @@
       <td>{ts domain="org.project60.sepa"}Creditor ID{/ts}</td>
       <td class="content">{$creditor_id}</td>
     </tr>
+    <tr id="sepa-thankyou-account-holder">
+      <td>{ts domain="org.project60.sepa"}Account Holder{/ts}</td>
+      <td class="content">{$account_holder}</td>
+    </tr>
     <tr id="sepa-thankyou-iban">
       <td>{ts domain="org.project60.sepa"}IBAN{/ts}</td>
       <td class="content">{$bank_account_number}</td>

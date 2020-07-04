@@ -53,7 +53,7 @@ In the form you will first enter general information about you and your organiza
 * **Address** - the address where the creditor is based (in most cases the address of your organization)
 * **Country** - the country of the creditor's address
 * **Currency** - the currency the collections will be in (most likely EUR)
-* **Indentifier** - this is an international ID that you should get from your bank 
+* **Identifier** - this is an international ID that you should get from your bank 
 * **IBAN** - the IBAN (account number)
 * **BIC** - the BIC number that goes with the IBAN (account number)
 * **PAIN version** PAIN is the format that your bank uses. You need to provide your file in this format for your bank to be able to read it. Your bank should be able to tell you what the version is, and it should be in the list you can select from.

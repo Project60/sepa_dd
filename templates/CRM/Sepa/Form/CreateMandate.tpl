@@ -70,6 +70,12 @@
   </div>
 
   <div class="crm-section">
+    <div class="label">{$form.account_holder.label}</div>
+    <div class="content">{$form.account_holder.html}</div>
+    <div class="clear"></div>
+  </div>
+
+  <div class="crm-section">
     <div class="label">{$form.iban.label}</div>
     <div class="content">{$form.iban.html}</div>
     <div class="clear"></div>

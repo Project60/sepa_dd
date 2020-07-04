@@ -47,11 +47,12 @@ class CreateOneOffMandate extends AbstractAction {
   public function getParameterSpecification() {
     return new SpecificationBag([
         // required fields
-        new Specification('contact_id', 'Integer', E::ts('Contact ID'), true),
-        new Specification('iban',       'String',  E::ts('IBAN'), true),
-        new Specification('bic',        'String',  E::ts('BIC'), true),
-        new Specification('reference',  'String',  E::ts('Mandate Reference'), false),
-        new Specification('amount',      'Money',  E::ts('Amount'), false),
+        new Specification('contact_id',     'Integer', E::ts('Contact ID'), true),
+        new Specification('account_holder', 'String',  E::ts('Account Holder'), true),
+        new Specification('iban',           'String',  E::ts('IBAN'), true),
+        new Specification('bic',            'String',  E::ts('BIC'), true),
+        new Specification('reference',      'String',  E::ts('Mandate Reference'), false),
+        new Specification('amount',         'Money',   E::ts('Amount'), false),
 
         // basic overrides
         new Specification('creditor_id',       'Integer', E::ts('Creditor (default)'), false, null, null, $this->getCreditors(), false),
@@ -92,7 +93,7 @@ class CreateOneOffMandate extends AbstractAction {
   protected function doAction(ParameterBagInterface $parameters, ParameterBagInterface $output) {
     $mandate_data = ['type' => 'OOFF'];
     // add basic fields
-    foreach (['contact_id', 'iban', 'bic', 'reference', 'amount', 'receive_date', 'date', 'validation_date'] as $parameter_name) {
+    foreach (['contact_id', 'account_holder', 'iban', 'bic', 'reference', 'amount', 'receive_date', 'date', 'validation_date'] as $parameter_name) {
       $value = $parameters->getParameter($parameter_name);
       if (!empty($value)) {
         $mandate_data[$parameter_name] = $value;

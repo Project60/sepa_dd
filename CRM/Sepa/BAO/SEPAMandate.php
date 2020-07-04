@@ -503,6 +503,11 @@ class CRM_Sepa_BAO_SEPAMandate extends CRM_Sepa_DAO_SEPAMandate {
 
     // BANK DETAIL CHANGES (applies to the MANDATE ENTITY)
     $bank_data_changes = array();
+    if (!empty($changes['account_holder']) && $changes['account_holder'] != $mandate['account_holder']) {
+      $bank_data_changes['account_holder'] = $changes['account_holder'];
+      $changes_details[] = ts("Account Holder changed from '%1' to '%2'",
+        array(1 => $mandate['account_holder'], 2 => $changes['account_holder'], 'domain' => 'org.project60.sepa'));
+    }
     if (!empty($changes['iban']) && $changes['iban'] != $mandate['iban']) {
       $bank_data_changes['iban'] = $changes['iban'];
       $changes_details[] = ts("IBAN changed from '%1' to '%2'",

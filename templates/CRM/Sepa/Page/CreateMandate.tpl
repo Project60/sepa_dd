@@ -93,6 +93,12 @@
 			<td id="iban_converter" rowspan="3" style="vertical-align: middle;">
 			</td>
 		</tr>
+		<tr>	<!-- Account Holder -->
+			<td>Account Holder:</td>
+			<td>
+				<input name="account_holder" type="text" size="32"  maxlength="255" value="{$account_holder}"/>
+			</td>
+		</tr>
 		<tr>	<!-- IBAN -->
 			<td>IBAN:</td>
 			<td>

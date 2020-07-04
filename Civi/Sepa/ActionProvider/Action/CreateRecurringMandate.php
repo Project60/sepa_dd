@@ -48,11 +48,12 @@ class CreateRecurringMandate extends CreateOneOffMandate {
   public function getParameterSpecification() {
     return new SpecificationBag([
         // required fields
-        new Specification('contact_id', 'Integer', E::ts('Contact ID'), true),
-        new Specification('iban',       'String',  E::ts('IBAN'), true),
-        new Specification('bic',        'String',  E::ts('BIC'), true),
-        new Specification('reference',  'String',  E::ts('Mandate Reference'), false),
-        new Specification('amount',     'Money',   E::ts('Amount'), false),
+        new Specification('contact_id',     'Integer', E::ts('Contact ID'), true),
+        new Specification('account_holder', 'String',  E::ts('Account Holder'), true), // TODO Check what `true` means
+        new Specification('iban',           'String',  E::ts('IBAN'), true),
+        new Specification('bic',            'String',  E::ts('BIC'), true),
+        new Specification('reference',      'String',  E::ts('Mandate Reference'), false),
+        new Specification('amount',         'Money',   E::ts('Amount'), false),
 
         // recurring information
         new Specification('frequency',  'Integer', E::ts('Frequency'),      false, 12, null, $this->getFrequencies()),
@@ -97,7 +98,7 @@ class CreateRecurringMandate extends CreateOneOffMandate {
   protected function doAction(ParameterBagInterface $parameters, ParameterBagInterface $output) {
     $mandate_data = ['type' => 'RCUR'];
     // add basic fields
-    foreach (['contact_id', 'iban', 'bic', 'reference', 'amount', 'start_date', 'date', 'validation_date'] as $parameter_name) {
+    foreach (['contact_id', 'account_holder', 'iban', 'bic', 'reference', 'amount', 'start_date', 'date', 'validation_date'] as $parameter_name) {
       $value = $parameters->getParameter($parameter_name);
       if (!empty($value)) {
         $mandate_data[$parameter_name] = $value;

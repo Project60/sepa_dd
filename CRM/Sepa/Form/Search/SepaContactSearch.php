@@ -71,13 +71,14 @@ class CRM_Sepa_Form_Search_SepaContactSearch extends CRM_Contact_Form_Search_Cus
   function &columns() {
     // return by reference
     $columns = array(
-      E::ts('Reference')  => 'reference',
-      E::ts('IBAN')       => 'iban',
-      E::ts('BIC')        => 'bic',
-      E::ts('Type')       => 'type',
-      E::ts('Status')     => 'status',
-      E::ts('Contact ID') => 'contact_id',
-      E::ts('Name')       => 'sort_name',
+      E::ts('Reference')      => 'reference',
+      E::ts('Account Holder') => 'account_holder',
+      E::ts('IBAN')           => 'iban',
+      E::ts('BIC')            => 'bic',
+      E::ts('Type')           => 'type',
+      E::ts('Status')         => 'status',
+      E::ts('Contact ID')     => 'contact_id',
+      E::ts('Name')           => 'sort_name',
     );
     return $columns;
   }
@@ -108,6 +109,7 @@ class CRM_Sepa_Form_Search_SepaContactSearch extends CRM_Contact_Form_Search_Cus
       contact_a.id           AS contact_id,
       contact_a.sort_name    AS sort_name,
       mandate.reference      AS reference,
+      mandate.account_holder AS account_holder,
       mandate.iban           AS iban,
       mandate.bic            AS bic,
       mandate.type           AS type,

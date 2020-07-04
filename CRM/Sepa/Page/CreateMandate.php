@@ -153,6 +153,7 @@ class CRM_Sepa_Page_CreateMandate extends CRM_Core_Page {
         'creation_date'             => date('YmdHis'),
         'validation_date'           => date('YmdHis'),
         'date'                      => date('YmdHis'),
+        'account_holder'            => $_REQUEST['account_holder'],
         'iban'                      => $_REQUEST['iban'],
         'bic'                       => $_REQUEST['bic'],
         'reference'                 => $_REQUEST['reference'],
@@ -305,7 +306,7 @@ class CRM_Sepa_Page_CreateMandate extends CRM_Core_Page {
 
     // copy known parameters
     $copy_params = array('contact_id', 'creditor_id', 'total_amount', 'financial_type_id', 'campaign_id', 'source', 'note',
-      'iban', 'bic', 'date', 'mandate_type', 'start_date', 'cycle_day', 'interval', 'end_date', 'reference');
+      'account_holder', 'iban', 'bic', 'date', 'mandate_type', 'start_date', 'cycle_day', 'interval', 'end_date', 'reference');
     foreach ($copy_params as $parameter) {
       if (isset($_REQUEST[$parameter]))
         $this->assign($parameter, $_REQUEST[$parameter]);
@@ -351,6 +352,7 @@ class CRM_Sepa_Page_CreateMandate extends CRM_Core_Page {
     }
 
     // set all the relevant values
+    $this->assign('account_holder', $mandate['account_holder']);
     $this->assign('iban', $mandate['iban']);
     $this->assign('bic', $mandate['bic']);
     $this->assign('financial_type_id', $contribution['financial_type_id']);

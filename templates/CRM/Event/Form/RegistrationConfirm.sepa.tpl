@@ -18,6 +18,7 @@
   <div class="header-dark">{ts domain="org.project60.sepa"}Direct Debit Payment{/ts}</div>
   <p id="sepa-confirm-text-account">{ts domain="org.project60.sepa"}This payment will be debited from the following account:{/ts}</p>
   <table class="sepa-confirm-text-account-details display" id="sepa-confirm-text-account-details">
+    <tr><td>{ts domain="org.project60.sepa"}Account Holder{/ts}</td> <td>{$account_holder}</td> </tr>
     <tr><td>{ts domain="org.project60.sepa"}IBAN{/ts}</td> <td>{$bank_account_number}</td> </tr>
     <tr><td>{ts domain="org.project60.sepa"}BIC{/ts}</td>  <td>{$bank_identification_number}</td>  </tr>
   </table>

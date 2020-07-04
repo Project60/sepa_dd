@@ -316,4 +316,14 @@ class CRM_Sepa_Upgrader extends CRM_Sepa_Upgrader_Base {
         }
         return TRUE;
     }
+
+  /**
+   * @return TRUE on success
+   * @throws Exception
+   */
+  public function upgrade_1508() {
+    $this->ctx->log->info('Adding mandate.account_holder field');
+    $this->executeSql("ALTER TABLE civicrm_sdd_mandate ADD COLUMN `account_holder` varchar(255) NULL DEFAULT NULL COMMENT 'Name of the account holder';");
+    return TRUE;
+  }
 }
