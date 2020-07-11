@@ -22,6 +22,10 @@
   <td class="label">{$form.sepa_active.label}</td>
   <td>{$form.sepa_active.html}</td>
 </tr>
+<tr id="crmf-account-holder">
+  <td class="label">{$form.account_holder.label}</td>
+  <td>{$form.account_holder.html}</td>
+</tr>
 <tr id="crmf-iban">
   <td class="label">{$form.bank_iban.label}</td>
   <td>{$form.bank_iban.html}</td>

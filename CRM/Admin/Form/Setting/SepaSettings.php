@@ -136,26 +136,27 @@ class CRM_Admin_Form_Setting_SepaSettings extends CRM_Admin_Form_Setting
         $bffrdays = CRM_Sepa_Logic_Settings::getGenericSetting('pp_buffer_days');
 
         // add creditor form elements
-        $this->addElement('text',       'addcreditor_creditor_id',  ts("Creditor Contact", array('domain' => 'org.project60.sepa')));
-        $this->addElement('text',       'addcreditor_label',        ts("Label", array('domain' => 'org.project60.sepa')));
-        $this->addElement('text',       'addcreditor_name',         ts("Name", array('domain' => 'org.project60.sepa')));
-        $this->addElement('text',       'addcreditor_id',           ts("Identifier", array('domain' => 'org.project60.sepa')));
-        $this->addElement('text',       'addcreditor_address',      ts("Address", array('domain' => 'org.project60.sepa')), array('size' => 60));
-        $this->addElement('select',     'addcreditor_country_id',   ts("Country", array('domain' => 'org.project60.sepa')), $country_ids);
-        $this->addElement('text',       'addcreditor_bic',          ts("BIC", array('domain' => 'org.project60.sepa')));
-        $this->addElement('text',       'addcreditor_iban',         ts("IBAN", array('domain' => 'org.project60.sepa')), array('size' => 30));
-        $this->addElement('select',     'addcreditor_currency',     ts("Currency", array('domain' => 'org.project60.sepa')), $currencies);
-        $this->addElement('select',     'addcreditor_type',         ts("Type", array('domain' => 'org.project60.sepa')), $creditor_types);
-        $this->addElement('select',     'addcreditor_pain_version', ts("PAIN Version", array('domain' => 'org.project60.sepa')), array('' => ts('- select -', array('domain' => 'org.project60.sepa'))) + CRM_Core_OptionGroup::values('sepa_file_format'));
-        $this->addElement('checkbox',   'addcreditor_uses_bic',     ts("Use BICs", array('domain' => 'org.project60.sepa')), "", (array('checked'=>'checked')));
-        $this->addElement('checkbox',   'is_test_creditor',         ts("Is a Test Creditor", array('domain' => 'org.project60.sepa')), "", array('value' =>'0'));
-        $this->addElement('checkbox',   'exclude_weekends',         ts("Exclude Weekends", array('domain' => 'org.project60.sepa')), "", ($excld_we?array('checked'=>'checked'):array()));
-        $this->addElement('checkbox',   'sdd_async_batching',       ts("Large Groups", array('domain' => 'org.project60.sepa')), "", ($async_batch?array('checked'=>'checked'):array()));
-        $this->addElement('checkbox',   'sdd_skip_closed',          ts("Only Completed Contributions", array('domain' => 'org.project60.sepa')), "", ($skip_closed?array('checked'=>'checked'):array()));
-        $this->addElement('checkbox',   'sdd_no_draft_xml',         ts("No XML drafts", array('domain' => 'org.project60.sepa')), "", ($no_draftxml?array('checked'=>'checked'):array()));
-        $this->addElement('text',       'pp_buffer_days',           ts("Buffer Days", array('domain' => 'org.project60.sepa')), array('size' => 2, 'value' => $bffrdays));
-        $this->addElement('hidden',     'edit_creditor_id',         '', array('id' => 'edit_creditor_id'));
-        $this->addElement('hidden',     'add_creditor_id',          '', array('id' => 'add_creditor_id'));
+        $this->addElement('text',       'addcreditor_creditor_id',    ts("Creditor Contact", array('domain' => 'org.project60.sepa')));
+        $this->addElement('text',       'addcreditor_label',          ts("Label", array('domain' => 'org.project60.sepa')));
+        $this->addElement('text',       'addcreditor_name',           ts("Name", array('domain' => 'org.project60.sepa')));
+        $this->addElement('text',       'addcreditor_id',             ts("Identifier", array('domain' => 'org.project60.sepa')));
+        $this->addElement('text',       'addcreditor_address',        ts("Address", array('domain' => 'org.project60.sepa')), array('size' => 60));
+        $this->addElement('select',     'addcreditor_country_id',     ts("Country", array('domain' => 'org.project60.sepa')), $country_ids);
+        $this->addElement('text',       'addcreditor_account_holder', ts("Account Holder", array('domain' => 'org.project60.sepa')));
+        $this->addElement('text',       'addcreditor_bic',            ts("BIC", array('domain' => 'org.project60.sepa')));
+        $this->addElement('text',       'addcreditor_iban',           ts("IBAN", array('domain' => 'org.project60.sepa')), array('size' => 30));
+        $this->addElement('select',     'addcreditor_currency',       ts("Currency", array('domain' => 'org.project60.sepa')), $currencies);
+        $this->addElement('select',     'addcreditor_type',           ts("Type", array('domain' => 'org.project60.sepa')), $creditor_types);
+        $this->addElement('select',     'addcreditor_pain_version',   ts("PAIN Version", array('domain' => 'org.project60.sepa')), array('' => ts('- select -', array('domain' => 'org.project60.sepa'))) + CRM_Core_OptionGroup::values('sepa_file_format'));
+        $this->addElement('checkbox',   'addcreditor_uses_bic',       ts("Use BICs", array('domain' => 'org.project60.sepa')), "", (array('checked'=>'checked')));
+        $this->addElement('checkbox',   'is_test_creditor',           ts("Is a Test Creditor", array('domain' => 'org.project60.sepa')), "", array('value' =>'0'));
+        $this->addElement('checkbox',   'exclude_weekends',           ts("Exclude Weekends", array('domain' => 'org.project60.sepa')), "", ($excld_we?array('checked'=>'checked'):array()));
+        $this->addElement('checkbox',   'sdd_async_batching',         ts("Large Groups", array('domain' => 'org.project60.sepa')), "", ($async_batch?array('checked'=>'checked'):array()));
+        $this->addElement('checkbox',   'sdd_skip_closed',            ts("Only Completed Contributions", array('domain' => 'org.project60.sepa')), "", ($skip_closed?array('checked'=>'checked'):array()));
+        $this->addElement('checkbox',   'sdd_no_draft_xml',           ts("No XML drafts", array('domain' => 'org.project60.sepa')), "", ($no_draftxml?array('checked'=>'checked'):array()));
+        $this->addElement('text',       'pp_buffer_days',             ts("Buffer Days", array('domain' => 'org.project60.sepa')), array('size' => 2, 'value' => $bffrdays));
+        $this->addElement('hidden',     'edit_creditor_id',           '', array('id' => 'edit_creditor_id'));
+        $this->addElement('hidden',     'add_creditor_id',            '', array('id' => 'add_creditor_id'));
 
         // add custom form elements and validation rules
         $index = 0;

@@ -322,6 +322,7 @@ class CRM_Sepa_TestBase extends \PHPUnit_Framework_TestCase implements HeadlessI
     $parameters['amount']            = array_key_exists('amount', $parameters)            ? $parameters['amount']            : 8;
     $parameters['financial_type_id'] = array_key_exists('financial_type_id', $parameters) ? $parameters['financial_type_id'] : 1;
     $parameters['creditor_id']       = array_key_exists('creditor_id', $parameters)       ? $parameters['creditor_id']       : CRM_Sepa_Logic_Settings::defaultCreditor()->id;
+    $parameters['account_holder']    = array_key_exists('account_holder', $parameters)    ? $parameters['account_holder']    : "";
 
     if ($parameters['type'] == self::MANDATE_TYPE_OOFF)
     {

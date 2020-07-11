@@ -166,6 +166,12 @@ function _civicrm_api3_sepa_mandate_createfull_spec(&$params) {
     'type'         => CRM_Utils_Type::T_STRING,
     'title'        => 'RCUR for recurring, OOFF for one-off',
   );
+  $params['account_holder'] = array(
+    'name'         => 'account_holder',
+    'api.required' => 0,
+    'type'         => CRM_Utils_Type::T_STRING,
+    'title'        => 'Account holder for the mandate',
+  );
   $params['iban'] = array(
     'name'         => 'iban',
     'api.required' => 1,

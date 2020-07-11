@@ -18,6 +18,11 @@
 {ts domain="org.project60.sepa"}Direct Debit Information{/ts}
 </legend>
 
+<div class="crm-section {$form.account_holder.name}-section">
+	<div class="label">{$form.account_holder.label}</div>
+	<div class="content">{$form.account_holder.html}</div>
+	<div class="clear"></div>
+</div>
 <div class="crm-section {$form.bank_iban.name}-section">
 	<div class="label">{$form.bank_iban.label}</div>
 	<div class="content">{$form.bank_iban.html}</div>

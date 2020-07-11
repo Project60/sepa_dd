@@ -57,9 +57,10 @@ class FindMandate extends CreateRecurringMandate {
   public function getParameterSpecification() {
     return new SpecificationBag([
         // required fields
-        new Specification('contact_id', 'Integer', E::ts('Contact ID'), false),
-        new Specification('iban',       'String',  E::ts('IBAN'), false),
-        new Specification('reference',  'String',  E::ts('Mandate Reference'), false),
+        new Specification('contact_id',     'Integer', E::ts('Contact ID'), false),
+        new Specification('account_holder', 'String', E::ts('Account Holder'), false),
+        new Specification('iban',           'String',  E::ts('IBAN'), false),
+        new Specification('reference',      'String',  E::ts('Mandate Reference'), false),
     ]);
   }
 
@@ -75,6 +76,7 @@ class FindMandate extends CreateRecurringMandate {
       new Specification('id',                'Integer', E::ts('Mandate ID'), false, null, null, null, false),
       new Specification('reference',         'String',  E::ts('Mandate Reference'), false, null, null, null, false),
       new Specification('type',              'String',  E::ts('Mandate Type'), false, null, null, null, false),
+      new Specification('account_holder',    'String',  E::ts('Account Holder'), false, null, null, null, false),
       new Specification('iban',              'String',  E::ts('IBAN'), false, null, null, null, false),
       new Specification('bic',               'String',  E::ts('BIC'), false, null, null, null, false),
       new Specification('contact_id',        'Integer', E::ts('Contact ID'), false, null, null, null, false),
@@ -117,6 +119,9 @@ class FindMandate extends CreateRecurringMandate {
     if (!empty($parameters->getParameter('contact_id'))) {
       $mandate_search['contact_id'] = $parameters->getParameter('contact_id');
     }
+    if (!empty($parameters->getParameter('account_holder'))) {
+      $mandate_search['account_holder'] = $parameters->getParameter('account_holder');
+    }
     if (!empty($parameters->getParameter('iban'))) {
       $mandate_search['iban'] = $parameters->getParameter('iban');
     }
@@ -136,6 +141,7 @@ class FindMandate extends CreateRecurringMandate {
       $output->setParameter('reference', $mandate['reference']);
       $output->setParameter('type', $mandate['type']);
       $output->setParameter('status', $mandate['status']);
+      $output->setParameter('account_holder', $mandate['account_holder']);
       $output->setParameter('iban', $mandate['iban']);
       $output->setParameter('contact_id', $mandate['contact_id']);
       $output->setParameter('creditor_id', $mandate['creditor_id']);

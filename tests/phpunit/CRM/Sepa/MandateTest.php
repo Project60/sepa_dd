@@ -257,4 +257,20 @@ class CRM_Sepa_MandateTest extends CRM_Sepa_TestBase
     $this->assertSame(self::MANDATE_TYPE_RCUR,  $rcurMandate['status'],  E::ts('Mandate status of new mandate is incorrect.'));
     $this->assertNotEmpty(CRM_Utils_Array::value('first_contribution_id', $rcurMandate), "first_contribution_id should be set now.");
   }
+
+  /**
+   * Test the creation of a mandate with non-empty account holder.
+   * @see Case_ID M01
+   */
+  public function testOOFFCreateAccountHolder()
+  {
+    $mandate = $this->createMandate(
+      [
+        'type' => self::MANDATE_TYPE_OOFF,
+        'account_holder' => "Test Account Holder"
+      ]
+    );
+
+    $this->assertSame("Test Account Holder", $mandate['account_holder'], E::ts('Mandate account holder after creation is incorrect.'));
+  }
 }

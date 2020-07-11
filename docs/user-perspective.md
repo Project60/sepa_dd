@@ -44,6 +44,7 @@ Now set up the mandate by adding a recurring contribution to CiviCRM entering th
 The second part of the mandate contains information about the bank account of the donor and the type of SEPA contribution
 ![Screenshot](/img/record_sepa_contribution_secondpart.png)
 
+* **Account Holder** - This is the account holder of the bank account. Leave empty if it is the same as the contact.
 * **IBAN**: the bank account number. There is a check to verify if it is a valid bank account number
 * **Bic**: BIC code of the bank
 * **Set start date**: always a date in the future, so register in time to be up to date with your mandates 

@@ -24,6 +24,7 @@
             <tr><td class="label">{ts domain="org.project60.sepa"}Status{/ts}</td><td><b>{$sepa.status_text}</b> ({$sepa.status})</td></tr>
             <tr><td class="label">{ts domain="org.project60.sepa"}Contact{/ts}</td><td><a href="{$contact1.link}"><div class="icon crm-icon {$contact1.contact_type}-icon"></div>{$contact1.display_name}</a></td></tr>
             <tr><td class="label">{ts domain="org.project60.sepa"}Reference{/ts}</td><td>{$sepa.reference}</td></tr>
+            <tr><td class="label">{ts domain="org.project60.sepa"}Account Holder{/ts}</td><td>{$sepa.account_holder}</td></tr>
             <tr><td class="label">{ts domain="org.project60.sepa"}IBAN{/ts}</td><td>{$sepa.iban}</td></tr>
             <tr><td class="label">{ts domain="org.project60.sepa"}BIC{/ts}</td><td>{$sepa.bic}</td></tr>
             <tr><td class="label">{ts domain="org.project60.sepa"}Creditor{/ts}</td><td>{$sepa.creditor_name} [{$sepa.creditor_id}]</td></tr>
