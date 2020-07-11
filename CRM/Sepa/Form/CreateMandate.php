@@ -157,7 +157,7 @@ class CRM_Sepa_Form_CreateMandate extends CRM_Core_Form {
         'text',
         'account_holder',
         E::ts('Account Holder'),
-        array('placeholder' => E::ts("not required if same as contact"), 'size' => '255')
+        array('placeholder' => E::ts("not required if same as contact"), 'size' => '32')
         // TODO what is TRUE or FALSE here?
     );
 
