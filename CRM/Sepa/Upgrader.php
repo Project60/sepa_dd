@@ -323,7 +323,11 @@ class CRM_Sepa_Upgrader extends CRM_Sepa_Upgrader_Base {
    */
   public function upgrade_1508() {
     $this->ctx->log->info('Adding mandate.account_holder field');
-    $this->executeSql("ALTER TABLE civicrm_sdd_mandate ADD COLUMN `account_holder` varchar(255) NULL DEFAULT NULL COMMENT 'Name of the account holder';");
+    $has_account_holder_column = CRM_Core_DAO::singleValueQuery("SHOW COLUMNS FROM `civicrm_sdd_mandate` LIKE 'account_holder';");
+    if (!$has_account_holder_column) {
+      // doesn't exist yet, add the column and set to '1'
+      $this->executeSql("ALTER TABLE civicrm_sdd_mandate ADD COLUMN `account_holder` varchar(255) NULL DEFAULT NULL COMMENT 'Name of the account holder';");
+    }
     return TRUE;
   }
 }
