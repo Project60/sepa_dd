@@ -581,7 +581,7 @@ function sepa_civicrm_tokenValues(&$values, $cids, $job = null, $tokens = array(
       $values[$result->contact_id]["$prefix.status"]          = $mandate['status'];
       $values[$result->contact_id]["$prefix.date"]            = $mandate['date'];
       $values[$result->contact_id]["$prefix.account_holder"]  = $mandate['account_holder'];
-      $values[$result->contact_id]["$prefix.iban"]            = $mandate[''];
+      $values[$result->contact_id]["$prefix.iban"]            = $mandate['iban'];
       $values[$result->contact_id]["$prefix.iban_anonymised"] = CRM_Sepa_Logic_Verification::anonymiseIBAN($mandate['iban']);
       $values[$result->contact_id]["$prefix.bic"]             = $mandate['bic'];
 

@@ -158,7 +158,6 @@ class CRM_Sepa_Form_CreateMandate extends CRM_Core_Form {
         'account_holder',
         E::ts('Account Holder'),
         array('placeholder' => E::ts("not required if same as contact"), 'size' => '32')
-        // TODO what is TRUE or FALSE here?
     );
 
     // add iban field
@@ -594,8 +593,6 @@ class CRM_Sepa_Form_CreateMandate extends CRM_Core_Form {
    * Get a list of known bank accounts from:
    *  - successful SEPA mandates
    *  - known CiviBanking accounts
-   * 
-   * TODO(account_holder): unclear if it should be added here.
    */
   protected function getKnownBankAccounts() {
     $known_accounts = array('' => E::ts("new account"));
