@@ -108,12 +108,15 @@ function civicrm_api3_sepa_mandate_createfull($params) {
     if ($params['type']=='RCUR') {
     	$contribution_entity = 'ContributionRecur';
 	    $contribution_table  = 'civicrm_contribution_recur';
-      	$create_contribution['payment_instrument_id'] = (int) CRM_Core_PseudoConstant::getKey('CRM_Contribute_BAO_Contribution', 'payment_instrument_id', 'RCUR');
-      	if (empty($create_contribution['status']))
-      		$create_contribution['status'] = 'FRST'; // set default status
-      	if (empty($create_contribution['is_pay_later']))
-      		$create_contribution['is_pay_later'] = 1; // set default pay_later
-
+	    if (!isset($create_contribution['payment_instrument_id'])) {
+        $create_contribution['payment_instrument_id'] = (int) CRM_Core_PseudoConstant::getKey('CRM_Contribute_BAO_Contribution', 'payment_instrument_id', 'RCUR');
+      }
+      if (empty($create_contribution['status'])) {
+        $create_contribution['status'] = 'FRST'; // set default status
+      }
+      if (empty($create_contribution['is_pay_later'])) {
+        $create_contribution['is_pay_later'] = 1; // set default pay_later
+      }
     } elseif ($params['type']=='OOFF') {
 	 	$contribution_entity = 'Contribution';
 	    $contribution_table  = 'civicrm_contribution';
