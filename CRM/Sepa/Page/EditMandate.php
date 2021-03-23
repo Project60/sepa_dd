@@ -52,7 +52,8 @@ class CRM_Sepa_Page_EditMandate extends CRM_Core_Page {
 
       } else if ($_REQUEST['action']=='adjustamount') {
         $this->adjustAmount($mandate_id);
-
+      } else if ($_REQUEST['action']=='changecyleday') {
+        $this->changecyleday($mandate_id);
       } else {
         CRM_Core_Session::setStatus(sprintf(ts("Unkown action '%s'. Ignored.", array('domain' => 'org.project60.sepa')), $_REQUEST['action']), ts('Error', array('domain' => 'org.project60.sepa')), 'error');
       }
@@ -100,12 +101,14 @@ class CRM_Sepa_Page_EditMandate extends CRM_Core_Page {
     }
 
     // load the creditor
+    $cycle_days = [];
     if (!empty($mandate['creditor_id'])) {
       $creditor = civicrm_api("SepaCreditor", "getsingle", array('id'=>$mandate['creditor_id'], 'version'=>3));
       if (!empty($creditor['is_error'])) {
         CRM_Core_Session::setStatus(sprintf(ts("Cannot read creditor [%s]. Error was: '%s'", array('domain' => 'org.project60.sepa')), $mandate['creditor_id'], $creditor['error_message']), ts('Error', array('domain' => 'org.project60.sepa')), 'error');
       } else {
         $mandate['creditor_name'] = $creditor['label'];
+        $cycle_days = CRM_Sepa_Logic_Settings::getListSetting("cycledays", range(1, 28), $creditor['id']);
       }
     }
 
@@ -137,6 +140,7 @@ class CRM_Sepa_Page_EditMandate extends CRM_Core_Page {
       $contribution['link']      = CRM_Utils_System::url('civicrm/contact/view/contributionrecur', "&reset=1&id=".$contribution['id']."&cid=".$contact2['id']);
       $contribution['currency']  = $contribution['currency'];
       $contribution['cycle']     = CRM_Utils_SepaOptionGroupTools::getFrequencyText($contribution['frequency_interval'], $contribution['frequency_unit'], true);
+      $contribution['cycle_day_raw'] = $contribution['cycle_day'];
       $contribution['cycle_day'] = CRM_Sepa_Logic_Batching::getCycleDay($contribution, $mandate['creditor_id']);
       if (isset($contribution['next_sched_contribution_date'])) {
         $contribution['next_sched_contribution_date'] = substr($contribution['next_sched_contribution_date'], 0, 10); // the date is enough
@@ -182,6 +186,7 @@ class CRM_Sepa_Page_EditMandate extends CRM_Core_Page {
     $this->assign('can_delete', CRM_Core_Permission::check('delete sepa groups'));
     $this->assign('can_modify', CRM_Sepa_Logic_Settings::getSetting('allow_mandate_modification'));
     $this->assign('sepa_templates', $tpl_ids);
+    $this->assign('cycle_days', $cycle_days);
 
     parent::run();
   }
@@ -294,6 +299,18 @@ class CRM_Sepa_Page_EditMandate extends CRM_Core_Page {
         }
       } else {
         CRM_Core_Session::setStatus(sprintf(ts("Invalid amount. Mandate not modified.", array('domain' => 'org.project60.sepa'))), ts('Error', array('domain' => 'org.project60.sepa')), 'error');
+      }
+    } else {
+      CRM_Core_Session::setStatus(sprintf(ts("Modifying an existing mandate is currently not allowed. You can change this on the SEPA settings page.", array('domain' => 'org.project60.sepa'))), ts('Error', array('domain' => 'org.project60.sepa')), 'error');
+    }
+  }
+
+  function changecyleday($mandate_id) {
+    if (CRM_Sepa_Logic_Settings::getSetting('allow_mandate_modification')) {
+      $new_cycle_day = $_REQUEST['new_cycle_day'];
+      $statuses = CRM_Sepa_BAO_SEPAMandate::modifyMandate($mandate_id, ['cycle_day' => $new_cycle_day]);
+      foreach($statuses as $status) {
+        CRM_Core_Session::setStatus($status, '', 'info');
       }
     } else {
       CRM_Core_Session::setStatus(sprintf(ts("Modifying an existing mandate is currently not allowed. You can change this on the SEPA settings page.", array('domain' => 'org.project60.sepa'))), ts('Error', array('domain' => 'org.project60.sepa')), 'error');

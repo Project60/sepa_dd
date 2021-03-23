@@ -48,7 +48,9 @@
 	            <tr><td class="label">{ts domain="org.project60.sepa"}Create Date{/ts}</td><td>{$contribution.create_date}</td></tr>
 	            <tr><td class="label">{ts domain="org.project60.sepa"}Last Modified{/ts}</td><td>{$contribution.modified_date}</td></tr>
 	            <tr><td class="label">{ts domain="org.project60.sepa"}Frequency{/ts}</td><td>{$contribution.cycle}</td></tr>
-	            <tr><td class="label">{ts domain="org.project60.sepa"}Collection Day{/ts}</td><td>{$contribution.cycle_day}</td></tr>
+	            <tr><td class="label">{ts domain="org.project60.sepa"}Collection Day{/ts}</td><td>{$contribution.cycle_day}
+
+              </td></tr>
                 <tr><td class="label">{ts domain="org.project60.sepa"}Start Date{/ts}</td><td>{$contribution.start_date}</td></tr>
                 <tr><td class="label">{ts domain="org.project60.sepa"}End Date{/ts}</td><td>{$contribution.end_date}</td></tr>
                 <tr><td class="label">{ts domain="org.project60.sepa"}Next Collection{/ts}</td><td>{$contribution.next_sched_contribution_date}</td></tr>
@@ -106,6 +108,18 @@
             </tr>{/if}{/if}
 
             {if $can_modify}{if $contribution.cycle_day}{if $sepa.status eq 'FRST' or $sepa.status eq 'RCUR' or $sepa.status eq 'INIT'}<tr>
+              <td class="label" style="vertical-align: middle;"><a class="button" onclick="mandate_action_change_cycle_day();">{ts domain="org.project60.sepa"}Change Cycle Day{/ts}</td>
+              <td>
+                  {ts domain="org.project60.sepa"}New cycle day:{/ts}<a id='template_help' onclick='CRM.help("{ts domain="org.project60.sepa"}Cyle Day{/ts}", {literal}{"id":"id-change-cycleday-help","file":"CRM\/Sepa\/Page\/EditMandate"}{/literal}); return false;' href="#" title="{ts domain="org.project60.sepa"}Help{/ts}" class="helpicon">&nbsp;</a>&nbsp;
+                  <select name="new_cycle_day" id="new_cycle_day" class="crm-form-select">
+                    {foreach from=$cycle_days item=cycle_day_label key=cycle_day_value}
+                      <option value="{$cycle_day_value}" {if ($cycle_day_value == $contribution.cycle_day_raw)}selected="selected"{/if}>{$cycle_day_label}</option>
+                    {/foreach}
+                  </select>
+              </td>
+            </tr>{/if}{/if}{/if}
+
+            {if $can_modify}{if $contribution.cycle_day}{if $sepa.status eq 'FRST' or $sepa.status eq 'RCUR' or $sepa.status eq 'INIT'}<tr>
                 <td class="label" style="vertical-align: middle;"><a class="button" onclick="mandate_action_adjust_amount();">{ts domain="org.project60.sepa"}Adjust Amount{/ts}</td>
                 <td>
                     {ts domain="org.project60.sepa"}Change amount to:{/ts}&nbsp;<input type="text" name="adjust_amount" id="adjust_amount" size="12" class="crm-form-text" value="{$contribution.amount}" />&nbsp;EUR
@@ -158,6 +172,11 @@ function mandate_action_delete() {
 function mandate_action_adjust_amount() {
     cj("#mandate_action_value").val('adjustamount');
     cj("#sepa_action_form").submit();
+}
+
+function mandate_action_change_cycle_day() {
+  cj("#mandate_action_value").val('changecyleday');
+  cj("#sepa_action_form").submit();
 }
 
 function mandate_action_cancel() {

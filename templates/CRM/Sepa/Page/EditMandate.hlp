@@ -19,3 +19,6 @@
     <p>{ts domain="org.project60.sepa"}The default template can be found and edited at "Communications" -> "Message Templates" -> "System Workflow Messages"{/ts}</p>
     <p>{ts domain="org.project60.sepa"}The templates listed here are all user templates that begin with the prefix 'SEPA'.{/ts}</p>
 {/htxt}
+{htxt id='id-change-cycleday-help'}
+    <p>{ts domain="org.project60.sepa"}When you change the cycle day be aware that you might end up collecting twice in the same month, or miss a collection altogether.{/ts}</p>
+{/htxt}
