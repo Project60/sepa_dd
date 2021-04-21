@@ -103,8 +103,7 @@ class CRM_Sepa_BAO_SEPATransactionGroup extends CRM_Sepa_DAO_SEPATransactionGrou
       LEFT JOIN civicrm_address a ON c.contact_id = a.contact_id AND a.is_primary = 1
       WHERE g.txgroup_id = %1
         AND c.contribution_status_id != 3
-        AND mandate.is_enabled = true
-      GROUP BY c.id"; //and not cancelled
+        AND mandate.is_enabled = true"; //and not cancelled
     $contrib = CRM_Core_DAO::executeQuery($query, $queryParams);
 
     setlocale(LC_CTYPE, 'en_US.utf8');

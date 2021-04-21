@@ -44,7 +44,7 @@ class CRM_Sepa_Page_MandateTab extends CRM_Core_Page {
         civicrm_contribution.total_amount  AS total_amount,
         civicrm_contribution.currency      AS currency,
         civicrm_contribution.cancel_reason AS cancel_reason,
-        IF(civicrm_sdd_mandate.status IN ('INIT', 'OOFF'), 'sepa-active', 'sepa-inactive')           
+        IF(civicrm_sdd_mandate.status IN ('INIT', 'OOFF'), 'sepa-active', 'sepa-inactive')
                                            AS class
       FROM civicrm_sdd_mandate
       LEFT JOIN civicrm_contribution   ON civicrm_contribution.id = civicrm_sdd_mandate.entity_id
@@ -105,7 +105,7 @@ class CRM_Sepa_Page_MandateTab extends CRM_Core_Page {
         civicrm_contribution_recur.frequency_unit               AS frequency_unit,
         civicrm_contribution_recur.currency                     AS currency,
         civicrm_contribution_recur.amount                       AS amount,
-        IF(civicrm_sdd_mandate.status IN ('FRST', 'RCUR', 'INIT', 'OOFF'), 'sepa-active', 'sepa-inactive')           
+        IF(civicrm_sdd_mandate.status IN ('FRST', 'RCUR', 'INIT', 'OOFF'), 'sepa-active', 'sepa-inactive')
                                                                 AS class
       FROM civicrm_sdd_mandate
       LEFT JOIN civicrm_contribution_recur ON civicrm_contribution_recur.id = civicrm_sdd_mandate.entity_id
@@ -120,7 +120,6 @@ class CRM_Sepa_Page_MandateTab extends CRM_Core_Page {
       WHERE civicrm_sdd_mandate.contact_id = %1
         AND civicrm_sdd_mandate.type = 'RCUR'
         AND civicrm_sdd_mandate.entity_table = 'civicrm_contribution_recur'
-      GROUP BY civicrm_sdd_mandate.id
       ORDER BY civicrm_contribution_recur.start_date DESC, civicrm_sdd_mandate.id DESC;";
 
     $mandate_ids = array();
@@ -180,8 +179,7 @@ class CRM_Sepa_Page_MandateTab extends CRM_Core_Page {
           AND civicrm_sdd_mandate.type = 'RCUR'
           AND civicrm_sdd_mandate.entity_table = 'civicrm_contribution_recur'
           AND civicrm_contribution.id IS NOT NULL
-        GROUP BY civicrm_sdd_mandate.id
-        ORDER BY civicrm_contribution.receive_date;";
+        GROUP BY civicrm_sdd_mandate.id";
       $fail_query = CRM_Core_DAO::executeQuery($fail_sequence);
       while ($fail_query->fetch()) {
         if (preg_match("#(?<last_fails>1+)$#", $fail_query->fail_sequence, $match)) {
@@ -202,7 +200,7 @@ class CRM_Sepa_Page_MandateTab extends CRM_Core_Page {
    */
   public static function getMandateCount($contact_id) {
     return CRM_Core_DAO::singleValueQuery("
-        SELECT COUNT(id) FROM civicrm_sdd_mandate 
+        SELECT COUNT(id) FROM civicrm_sdd_mandate
         WHERE contact_id = %1
           AND status IN ('FRST', 'RCUR', 'OOFF', 'INIT');",
             array( 1 => array($contact_id, 'Integer')));
