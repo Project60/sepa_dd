@@ -71,8 +71,8 @@ class CRM_Sepa_BAO_SEPAMandate extends CRM_Sepa_DAO_SEPAMandate {
         // If no mandate reference was supplied by the caller nor the customisation hook, create a nice default one.
         $dao = new CRM_Core_DAO();
         $database = $dao->database();
-        $next_id = CRM_Core_DAO::singleValueQuery("SELECT auto_increment FROM information_schema.tables WHERE table_schema='$database' and table_name='civicrm_sdd_mandate';");
-        $params['reference'] = $creditor['mandate_prefix'] . '-' . $params['creditor_id'] . '-' . $params['type'] . '-' . date("Y") . '-' . $next_id;
+        $uuid = CRM_Core_DAO::singleValueQuery("SELECT CONV(UUID_SHORT(), 10, 36)");
+        $params['reference'] = $creditor['mandate_prefix'] . '-' . $params['creditor_id'] . '-' . $params['type'] . '-' . date("Y") . '-' . $uuid;
       }
     }
 
